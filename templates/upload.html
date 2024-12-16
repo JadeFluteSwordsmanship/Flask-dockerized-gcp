@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Upload & Classify</title>
+</head>
+<body>
+    <h1>Upload an Image and Select a Model</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <p>
+            <label for="image">Select Image:</label>
+            <input type="file" name="image" id="image" required />
+        </p>
+        <p>
+            <label for="model_type">Select Model:</label>
+            <select name="model_type" id="model_type">
+                <option value="vit">ViT Model</option>
+                <option value="performer">Performer Model</option>
+            </select>
+        </p>
+        <button type="submit">Classify</button>
+    </form>
+    <p><a href="{{ url_for('index') }}">Back to Home</a></p>
+</body>
+</html>

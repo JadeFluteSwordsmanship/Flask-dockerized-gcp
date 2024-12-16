@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Classification Result</title>
-</head>
-<body>
-    <h1>Classification Result</h1>
-    {% if label %}
-        <p>The image is classified as: <strong>{{ label }}</strong></p>
-    {% else %}
-        <p>No classification result found.</p>
-    {% endif %}
-    <p>Model used: <strong>{{ model_type }}</strong></p>
+{% extends "base.html" %}
 
-    <p><a href="{{ url_for('classify') }}">Classify Another Image</a></p>
-    <p><a href="{{ url_for('index') }}">Back to Home</a></p>
-</body>
-</html>
+{% block title %}Classification Result{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Classification Result</h1>
+{% if label %}
+<p class="alert alert-info">The image is classified as: <strong>{{ label }}</strong></p>
+{% else %}
+<p class="alert alert-warning">No classification result found.</p>
+{% endif %}
+
+<p>Model used: <strong>{{ model_type }}</strong></p>
+{% if inference_time %}
+<p>Inference time: <strong>{{ inference_time|round(4) }} seconds</strong></p>
+{% endif %}
+
+<div class="mt-3">
+    <a class="btn btn-primary" href="{{ url_for('classify') }}">Classify Another Image</a>
+    <a class="btn btn-secondary" href="{{ url_for('index') }}">Back to Home</a>
+</div>
+{% endblock %}

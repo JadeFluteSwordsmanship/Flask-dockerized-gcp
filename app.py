@@ -4,6 +4,7 @@ from PIL import Image
 import torch
 import torchvision.transforms as transforms
 import torch.nn as nn
+import time
 import numpy as np
 from vit import ViT, PerformerViT
 import io
@@ -121,14 +122,15 @@ def classify():
 
         img = Image.open(file.stream).convert('RGB')
         x = preprocess_image(img)
-
+        start_time = time.time()
         with torch.no_grad():
             preds = model(x)
             pred_class = torch.argmax(preds, dim=1).item()
             class_name = CLASSES[pred_class]
-
+        end_time = time.time()
+        inference_time = end_time - start_time
         # 返回结果页面或者JSON都可以，这里返回到一个结果页
-        return render_template('result.html', label=class_name, model_type=model_type)
+        return render_template('result.html', label=class_name, model_type=model_type, inference_time=inference_time)
 
     else:
         # GET请求，返回上传页面

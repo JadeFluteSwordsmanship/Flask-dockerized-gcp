@@ -3,20 +3,26 @@
 {% block title %}Upload & Classify{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Upload an Image and Select a Model</h1>
-<form method="POST" enctype="multipart/form-data" class="mb-3">
-    <div class="mb-3">
-        <label for="image" class="form-label">Select Image:</label>
-        <input type="file" name="image" id="image" class="form-control" required />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h1 class="mb-4 text-center">Upload an Image and Select a Model</h1>
+        <form method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
+            <div class="mb-3">
+                <label for="image" class="form-label">Select Image:</label>
+                <input type="file" name="image" id="image" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label for="model_type" class="form-label">Select Model:</label>
+                <select name="model_type" id="model_type" class="form-select">
+                    <option value="vit">ViT Model</option>
+                    <option value="performer">Performer Model</option>
+                </select>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-success">Classify</button>
+                <a class="btn btn-secondary" href="{{ url_for('index') }}">Back to Home</a>
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="model_type" class="form-label">Select Model:</label>
-        <select name="model_type" id="model_type" class="form-select">
-            <option value="vit">ViT Model</option>
-            <option value="performer">Performer Model</option>
-        </select>
-    </div>
-    <button type="submit" class="btn btn-success">Classify</button>
-</form>
-<a class="btn btn-secondary" href="{{ url_for('index') }}">Back to Home</a>
+</div>
 {% endblock %}

@@ -6,6 +6,22 @@
 <div class="text-center">
     <h1 class="mb-4">Welcome to the CIFAR Classifier</h1>
     <p>This web app allows you to upload an image, select a model, and classify it into one of the CIFAR-10 categories.</p>
-    <a class="btn btn-primary mt-3" href="{{ url_for('classify') }}">Go to Classification Page</a>
+    <p>The two models are a vision transformer model that uses <strong>patchsize=4</strong> and the traditional attention kernel,</p>
+    <p>and a <strong>Performer-Relu</strong> model that uses fast attention mechanisms.</p>
+    <p>By approximating the regular attention mechanism via random feature maps, Performers can estimate regular
+    (softmax) full-rank-attention Transformers with provable accuracy, but using only
+    linear (as opposed to quadratic) space and time complexity.</p>
+
+    <div class="text-center my-4">
+        <img src="{{ url_for('static', filename='1.png') }}"
+             alt="CIFAR Classifier"
+             class="img-fluid d-block mx-auto shadow-lg"
+             style="max-width: 100%; height: auto;" />
+    </div>
 </div>
+
+<div class="fixed-floating">
+    <a class="btn btn-primary btn-lg" href="{{ url_for('classify') }}">Go to Classification Page</a>
+</div>
+
 {% endblock %}

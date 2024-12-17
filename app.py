@@ -5,15 +5,11 @@ import torch
 import torchvision.transforms as transforms
 import torch.nn as nn
 import time
-import numpy as np
 from vit import ViT, PerformerViT
 import io
 
 app = Flask(__name__)
-app.secret_key = 'some_secret_key'  # 部署生产环境时请更改此密钥
 
-# TODO: 根据你训练的模型架构参数进行修改
-# ViT模型参数（示例）
 vit_params = {
     'image_size': 32,
     'patch_size': 4,
@@ -30,7 +26,6 @@ vit_params = {
     'qkv_bias': True
 }
 
-# Performer模型参数（示例）
 performer_params = {
     'image_size': 32,
     'patch_size': 4,
@@ -129,13 +124,10 @@ def classify():
             class_name = CLASSES[pred_class]
         end_time = time.time()
         inference_time = end_time - start_time
-        # 返回结果页面或者JSON都可以，这里返回到一个结果页
         return render_template('result.html', label=class_name, model_type=model_type, inference_time=inference_time)
 
     else:
-        # GET请求，返回上传页面
         return render_template('upload.html')
 
 if __name__ == '__main__':
-    # 本地测试
     app.run(host='0.0.0.0', port=8080, debug=True)
